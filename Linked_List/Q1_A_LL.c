@@ -11,9 +11,9 @@ Purpose: Implementing the required functions for Question 1 */
 
 //////////////////////////////////////////////////////////////////////////////////
 
-typedef struct _listnode{
+typedef struct _listnode{ // _listnode는 구조체의 이름 _는 충돌을 피하기 위해
 	int item;
-	struct _listnode *next;
+	struct _listnode *next; //next는 다음 노드를 가리키는 포인터
 } ListNode;			// You should not change the definition of ListNode
 
 typedef struct _linkedlist{
@@ -71,7 +71,7 @@ int main()
 		case 3:
 			printf("The resulting sorted linked list is: ");
 			printList(&ll);
-			removeAllItems(&ll);
+			//removeAllItems(&ll);
 			break;
 		case 0:
 			removeAllItems(&ll);
@@ -88,10 +88,32 @@ int main()
 
 //////////////////////////////////////////////////////////////////////////////////
 
-int insertSortedLL(LinkedList *ll, int item)
+int insertSortedLL(LinkedList *ll, int item) 
 {
-	/* add your code here */
+    if (ll == NULL) return -1; // 1. 유효성 검사
+
+    ListNode *current = ll->head;
+    int index = 0;
+
+    // 2. 삽입 위치 탐색 (current가 NULL이거나 item보다 큰 값을 만날 때까지)
+    while (current != NULL && current->item < item) {
+        current = current->next;
+        index++;
+    }
+
+    // 3. 중복 값 확인
+    if (current != NULL && current->item == item) {
+        return -1; // 이미 존재하는 경우
+    }
+
+    // 4. 노드 삽입
+    if (insertNode(ll, index, item) == 0) {
+        return index; // 성공 시 인덱스 반환
+    } else {
+        return -1; // 실패 시 오류
+    }
 }
+
 
 ///////////////////////////////////////////////////////////////////////////////////
 
