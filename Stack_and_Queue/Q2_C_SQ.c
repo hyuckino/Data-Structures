@@ -33,7 +33,7 @@ typedef struct _stack
 
 // You should not change the prototypes of these functions
 void createStackFromLinkedList(LinkedList *ll , Stack *stack);
-void removeEvenValues(Stack *s);
+// void removeEvenValues(Stack *s);
 
 void push(Stack *s , int item);
 int pop(Stack *s);
@@ -88,7 +88,7 @@ int main()
 			printList(&(s.ll));
 			break;
 		case 3:
-			removeEvenValues(&s); // You need to code this function
+			// removeEvenValues(&s); // You need to code this function
 			printf("The resulting stack after removing even integers is: ");
 			printList(&(s.ll));
 			removeAllItemsFromStack(&s);
@@ -113,13 +113,22 @@ int main()
 
 void createStackFromLinkedList(LinkedList *ll, Stack *s)
 {
-    /* add your code here */
+    // 초기화
+    s->ll.size = 0;
+    s->ll.head = NULL;
+
+    ListNode *cur = ll->head;
+    while (cur != NULL)
+    {
+        push(s, cur->item);  // 하나씩 복사 삽입
+        cur = cur->next;
+    }
 }
 
-void removeEvenValues(Stack *s)
-{
-	/* add your code here */
-}
+// void removeEvenValues(Stack *s)
+// {
+// 	/* add your code here */
+// }
 
 //////////////////////////////////////////////////////////////////////////////////
 
