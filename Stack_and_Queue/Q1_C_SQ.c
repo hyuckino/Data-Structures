@@ -33,7 +33,7 @@ typedef struct _queue
 
 // You should not change the prototypes of these functions
 void createQueueFromLinkedList(LinkedList *ll, Queue *q);
-void removeOddValues(Queue *q);
+// void removeOddValues(Queue *q);
 
 void enqueue(Queue *q, int item);
 int dequeue(Queue *q);
@@ -91,7 +91,7 @@ int main()
 			printList(&(q.ll));
 			break;
 		case 3:
-			removeOddValues(&q); // You need to code this function
+			// removeOddValues(&q); // You need to code this function
 			printf("The resulting queue after removing odd integers is: ");
 			printList(&(q.ll));
 			removeAllItemsFromQueue(&q);
@@ -116,13 +116,23 @@ int main()
 
 void createQueueFromLinkedList(LinkedList *ll, Queue *q)
 {
-	/* add your code here */
+    // 초기화
+    q->ll.size = 0;
+    q->ll.head = NULL;
+
+    ListNode *cur = ll->head;
+    while (cur != NULL)
+    {
+        enqueue(q, cur->item);  // 하나씩 복사 삽입
+        cur = cur->next;
+    }
 }
 
-void removeOddValues(Queue *q)
-{
-	/* add your code here */
-}
+
+// void removeOddValues(Queue *q)
+// {
+// 	/* add your code here */
+// }
 
 //////////////////////////////////////////////////////////////////////////////////
 
