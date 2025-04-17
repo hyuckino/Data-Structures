@@ -103,14 +103,35 @@ int main()
 
 ////////////////////////////////////////////////////////////
 int balanced(char *expression)
-{
-/* add your code here */
+{	
+	Stack s;
+	s.ll.head = NULL;
+	s.ll.size = 0;
+
+	for (int i = 0; expression[i] != '\0'; i++){
+		char ch = expression[i];
+		if (ch=='(' || ch =='{' || ch == '[')
+			push(&s,ch);
+		if (ch==')')
+			if (pop(&s)!='(')
+				return 1;
+		if (ch==']')
+			if (pop(&s)!='[')
+				return 1;
+		if (ch=='}')
+			if (pop(&s)!='{')
+				return 1;
+			}
+	if (isEmptyStack(&s))
+		return 0;		
+	else 
+		return 1;
 }
 
 ////////////////////////////////////////////////////////////
 
 void removeAllItemsFromStack(Stack *s)
-{
+{	
 	if (s == NULL)
 		return;
 	while (s->ll.head != NULL)

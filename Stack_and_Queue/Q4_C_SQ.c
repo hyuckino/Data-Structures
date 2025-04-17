@@ -112,7 +112,19 @@ int main()
 
 void reverse(Queue *q)
 {
-/* add your code here */
+	Stack s;
+	s.ll.head=NULL;
+	s.ll.size =0;
+	s.ll.tail =NULL;
+	// initStack(&s);  // 스택 초기화 안하면 munmap_chunk(): invalid pointer Aborted (core dumped) 오류 남남
+	while(!isEmptyQueue(q)){
+		push(&s ,dequeue(q));
+	}
+	while(!isEmptyStack(&s)){
+		enqueue(q,pop(&s));
+	
+	}
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -208,9 +220,9 @@ int insertNode(LinkedList *ll, int index, int value){
 
 	// If empty list or inserting first node, need to update head pointer
 	if (ll->head == NULL || index == 0){
-		cur = ll->head;
-		ll->head = malloc(sizeof(ListNode));
-		ll->head->item = value;
+		cur = ll->head;  // 현재 ll의 heap 공간 할당 주소 cur에 복사사
+		ll->head = malloc(sizeof(ListNode)); // ll의 head 이름의 공간에 원래 있던 (cur의 주소)에 malloc으로 재할당(빈 값) -- 덮어쓰기기
+		ll->head->item = value; 
 		ll->head->next = cur;
 		ll->size++;
 		return 0;
