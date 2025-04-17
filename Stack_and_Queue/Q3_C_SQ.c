@@ -103,8 +103,23 @@ int main()
 
 int isStackPairwiseConsecutive(Stack *s)
 {
-  /* add your code here */
+    while (!isEmptyStack(s)) {
+        int first = pop(s);
+
+        if (isEmptyStack(s)) {
+            // 홀수 개라서 짝이 안 맞음
+            return 0;
+        }
+
+        int second = pop(s);
+
+        if (abs(first - second) != 1) {
+            return 0;
+        }
+    }
+    return 1;
 }
+
 
 //////////////////////////////////////////////////////////////////////////////////
 

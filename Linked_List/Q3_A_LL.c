@@ -108,7 +108,7 @@ void moveOddItemsToBack(LinkedList *ll)
 			// 삭제했으니 i는 유지 (다음 노드는 같은 인덱스에 있음)
 			originalSize--; // 리스트에서 하나 줄었으니 총 반복 횟수도 줄여야 함
 		} else {
-			index++; // 짝수면 다음 인덱스로 이동
+			index++; // 짝수면 다음 인덱스로 이동 패스스
 	}
 }
 }

@@ -74,7 +74,9 @@ int main()
 			break;
 		case 2:
 			printf("The resulting linked lists after splitting the given linked list are:\n");
-			frontBackSplitLinkedList(&ll, &resultFrontList, &resultBackList); // You need to code this function
+			frontBackSplitLinkedList(&ll, &resultFrontList, &resultBackList);
+			printf("linked list: ");
+			printList(&ll); // You need to code this function
 			printf("Front linked list: ");
 			printList(&resultFrontList);
 			printf("Back linked list: ");
@@ -82,12 +84,12 @@ int main()
 			printf("\n");
 			removeAllItems(&ll);
 			// removeAllItems(&resultFrontList);
-			// removeAllItems(&resultBackList);
+			removeAllItems(&resultBackList);
 			break;
 		case 0:
 			removeAllItems(&ll);
 			// removeAllItems(&resultFrontList);
-			// removeAllItems(&resultBackList);
+			removeAllItems(&resultBackList);
 			break;
 		default:
 			printf("Choice unknown;\n");
@@ -100,23 +102,24 @@ int main()
 
 //////////////////////////////////////////////////////////////////////////////////
 
-void frontBackSplitLinkedList(LinkedList *ll, LinkedList *resultFrontList, LinkedList *resultBackList)
+void frontBackSplitLinkedList(LinkedList *ll, LinkedList *resultFrontList, 
+	LinkedList *resultBackList)
 {
 	if (ll == NULL || ll->size == 0) return;
-	int index = ll->size / 2;
+
+	int index = (ll->size -1) / 2;  // 앞 리스트가 하나 더 많게 설정
 
 	resultFrontList->head = findNode(ll, 0);
 	resultBackList->head = findNode(ll, index+1);
-	//중간 노드 끊어 버리기기
+
+	//중간 노드 끊어 버리기
 	ListNode *midPrev = findNode(ll, index);
-	if (midPrev != NULL){
+	if (midPrev != NULL){ // 1일때
 		midPrev->next = NULL;
 	}
 	
-	resultFrontList->size = index+1;
-	resultBackList->size = ll->size - index-1;
-
-
+	resultFrontList->size = index;
+	resultBackList->size = ll->size - index;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
